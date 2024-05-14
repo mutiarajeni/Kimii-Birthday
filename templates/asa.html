@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta property="og:title" content="For my biyy ⋆.˚ಇ." />
+    <meta property="og:description" content="a special web for someone special" />
+    <meta property="og:image" content="{{ url_for('static', filename='love.jpg') }}" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="../static/img/image.png" />
+    <title>Kimii's Birthday Card</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: "Josefin Sans", sans-serif;
+        }
+    </style>
+
+
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #cee6ff;
+        }
+
+        .birthdayCard {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform: perspective(2500px);
+            transition: 4s;
+        }
+
+        .birthdayCard:hover {
+            transform: perspective(2500px) rotate(5deg);
+
+        }
+
+        .birthdayCard:hover .cardFront {
+            transform: rotateY(-160deg);
+        }
+
+        .birthdayCard:hover .front-text {
+            display: none;
+        }
+
+        .birthdayCard:hover .wrap-deco {
+            display: none;
+        }
+
+        .birthdayCard:hover .wrap-decoTwo {
+            display: none;
+        }
+
+        .birthdayCard:hover .plate {
+            display: none;
+        }
+
+
+        .cardFront {
+            border-radius: 5%;
+            position: relative;
+            background-color: #9fccfc;
+            width: 350px;
+            height: 450px;
+            overflow: hidden;
+            transform-origin: left;
+            box-shadow: inset 100px 20px 100px rgba(0, 0, 0, .13), 30px 0 50px rgba(0, 0, 0, 0.1);
+            transition: .4s;
+        }
+
+        .happy,
+        .toyou {
+            position: relative;
+            text-align: center;
+            backface-visibility: hidden;
+            font-size: 25px;
+            color: #0b4090;
+        }
+
+        .happy {
+            top: 250px;
+        }
+
+        .bday {
+            position: relative;
+            font-size: 30px;
+            text-align: center;
+            top: 230px;
+            color: #1e72f0;
+        }
+
+        .toyou {
+            top: 210px;
+        }
+
+
+        .wrap-deco {
+            position: absolute;
+            top: -260px;
+            left: -165px;
+        }
+
+        .decorations {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            border: 3px solid #333;
+            border-radius: 50%;
+        }
+
+        .decorations:before,
+        .decorations:after,
+        .decorationsTwo:before,
+        .decorationsTwo:after,
+        .decorationsThree:before,
+        .decorationsThree:after {
+            content: "";
+            position: absolute;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            width: 0;
+            height: 0;
+        }
+
+        .decorations:before {
+            border-top: 40px solid #486bb1;
+            top: 298px;
+            left: 160px;
+            transform: rotate(3deg);
+        }
+
+        .decorations:after {
+            border-top: 40px solid #007bf6;
+            top: 292px;
+            left: 230px;
+            transform: rotate(-12deg);
+        }
+
+        .decorationsTwo:before {
+            border-top: 40px solid #001c6e;
+            top: 268px;
+            left: 300px;
+            transform: rotate(-28deg);
+        }
+
+        .decorationsTwo:after,
+        .decorationsThree:after {
+            border-top: 40px solid #4400cd;
+            top: 220px;
+            left: 360px;
+            transform: rotate(-52deg);
+        }
+
+        .wrap-decoTwo {
+            transform: scaleX(-1);
+            position: absolute;
+            top: -200px;
+            left: 510px;
+        }
+
+
+
+        .decorationsThree:before {
+            border-top: 40px solid #4e7cd1;
+            top: 268px;
+            left: 300px;
+            transform: rotate(-28deg);
+        }
+
+        .plate {
+            position: absolute;
+            width: 130px;
+            height: 5px;
+            background-color: #cee6ff;
+            left: 110px;
+            top: 240px;
+        }
+
+        .cake {
+            position: absolute;
+            overflow: hidden;
+            width: 100px;
+            height: 50px;
+            background-color: #27abf3;
+            border-radius: 10px 10px 0 0;
+            top: -50px;
+            left: 15px;
+            box-shadow: inset 0 -15px #0b4090, inset 0 15px #432818;
+        }
+
+        .cake:before {
+            content: "";
+            position: absolute;
+            background-color: #432818;
+            width: 10px;
+            height: 20px;
+            top: 5px;
+            border-radius: 20px;
+            box-shadow: 10px 5px #cee6ff, 20px 0px #432818, 30px 2px #cee6ff, 40px 5px #432818, 50px 5px #cee6ff, 60px 0px #432818, 70px 5px #cee6ff, 80px 5px #432818, 90px 5px #cee6ff;
+        }
+
+        .plate:before {
+            content: "";
+            position: absolute;
+            background: repeating-linear-gradient(-45deg, #9b5de5, #9b5de5 3px, #00f5d4 3px, #00f5d4 6px);
+            width: 7px;
+            height: 25px;
+            top: -75px;
+            left: 61px;
+        }
+
+        .plate:after {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 5px;
+            background-color: #333;
+            top: -80px;
+            left: 64px;
+        }
+
+
+        .flame {
+            position: absolute;
+            background-color: #fb5607;
+            border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+            transform: rotate(-45deg);
+            width: 15px;
+            height: 15px;
+            opacity: 0.7;
+            top: -93px;
+            left: 57px;
+        }
+
+
+        .cardInside {
+            border-radius: 5%;
+            position: absolute;
+            background-color: #9fccfc;
+            width: 350px;
+            height: 450px;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2);
+        }
+
+        .inside-text {
+            position: relative;
+            top: -180px;
+            transform: scale(0.7);
+        }
+
+        .wishes {
+            position: relative;
+            top: -60px;
+            left: 25px;
+            margin: 25px;
+        }
+
+        .bintang {
+            position: relative;
+            top: -60px;
+            margin: 25px;
+        }
+
+        p {
+            color: #333;
+        }
+
+        .name {
+            margin-left: 180px;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+<div class="birthdayCard">
+    <div class="cardFront">
+        <div class="front-text">
+            <h4 class="happy">Open Your</h4>
+            <h3 class="bday">˗ˏˋ Special ˎˊ˗</h3>
+            <h4 class="toyou">Card</h4>
+        </div>
+        <div class="wrap-deco">
+            <div class="decorations"></div>
+            <div class="decorationsTwo"></div>
+        </div>
+        <div class="wrap-decoTwo">
+            <div class="decorations"></div>
+            <div class="decorationsThree"></div>
+        </div>
+        <div class="plate">
+            <div class="cake"></div>
+            <div class="flame"></div>
+        </div>
+    </div>
+    <div class="cardInside">
+        <div class="inside-text">
+            <h3 class="happy">Happy</h3>
+            <h2 class="bday">20th Birthday</h2>
+            <h3 class="toyou">Kimii⋆˚ಇ.
+               </h3>
+        </div>
+        <div class="wishes">
+            <video width="250" height="250" controls>
+                <source src="../static/ayaya.mp4" type="video/mp4">
+                Maaf, browser Anda tidak mendukung pemutaran video.
+            </video>
+
+        </div>
+        <div class="bintang">
+            <p style="color: #001c6e;">&nbsp;&nbsp;── ⋆⋅☆⋅⋆ ──── ⋆⋅☆⋅⋆ ──── ⋆⋅☆⋅⋆ ──</p>
+        </div>
+
+    </div>
+</div>
+
+</html>
